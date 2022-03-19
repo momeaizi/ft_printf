@@ -1,6 +1,7 @@
 NAME = libftprintf.a
 
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_printf.c \
@@ -10,31 +11,20 @@ SRCS = ft_printf.c \
 	   functions1.c \
 	   functions2.c
 
-BONUS = ft_printf_bonus.c \
-	   ft_flags_bonus.c \
-	   characters_bonus.c \
-	   functions_bonus.c \
-	   functions1_bonus.c \
-	   functions2_bonus.c
-
 OBJS :=$(SRCS:.c=.o)
-
-BONUS_OBJS :=$(BONUS:.c=.o)
 
 .PHONY : all fclean clean re
 
 all : $(NAME)
 
-bonus : $(BONUS_OBJS)
-
 $(NAME) : $(OBJS)
+	ar -rc $(NAME) $^
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
-	ar -rc $(NAME) $@
 
 clean :
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 
 fclean : clean
 	rm -f $(NAME)
